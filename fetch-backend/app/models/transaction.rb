@@ -2,8 +2,21 @@ class Transaction < ApplicationRecord
   belongs_to :user
   belongs_to :payer
 
-  def process_transaction
-    ##takes arg of transaction amount
+  def process_new_transaction(amount, user, payer)
+    user_bal = user["pts_balance"]
+    payer_bal = payer["pts_balance"]
+
+    #add var for new abalance for each and update user and payer point
+    #bals to reflect this
+    #where to do check for no nonzero
+    #here i think -> if amount > user pts bal then errror message
+
+
+    if amount > 0
+      user.update(pts_balance: )
+
+
+    ##takes arg of transaction amount, user and payer
 
     ##if positive, update user and payer bals
 
