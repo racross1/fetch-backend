@@ -2,6 +2,9 @@ class TransactionsController < ApplicationController
 
 # class methods to be added to create 
 def create
+    amount = 
+    
+    transaction = Transaction.create(user_id: )
     #check user balance
     #if requested amount exceeds user balance, give error message
 
@@ -16,3 +19,5 @@ end
 
 
 end
+
+

@@ -11,12 +11,14 @@ User.delete_all
 Payer.delete_all
 
 
-u1 = User.create(username: 'test_user', pts_balance: 1000)
+u1 = User.create(username: 'test_user', pts_balance: 0)
 
 p1 = Payer.create(name: "DANNON", pts_balance: 0)
 p2 = Payer.create(name: "MILLER COORS", pts_balance: 0)
 p3 = Payer.create(name: "GAP", pts_balance: 0)
 p4 = Payer.create(name: "UNILEVER", pts_balance: 0)
+
+##
 
 
 
