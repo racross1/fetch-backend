@@ -29,7 +29,9 @@ t3 = Transaction.create(user_id: u1.id, payer_id: p3.id, init_amount: 300, activ
 t3.process_new_transaction
 t4 = Transaction.create(user_id: u1.id, payer_id: p1.id, init_amount: 50, active_amount: 50)
 t4.process_new_transaction
-t5 = Transaction.create(user_id: u1.id, payer_id: null, init_amount: -1000, active_amount: -1000)
-t5.process_new_transaction
+
+puts Transaction.get_active_transactions[0]
+puts Payer.all
+# puts `user bals: #{User.all}`
 
 puts "done"

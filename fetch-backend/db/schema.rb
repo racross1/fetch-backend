@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_203943) do
+ActiveRecord::Schema.define(version: 2021_06_04_195747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 2021_06_03_203943) do
     t.integer "pts_balance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "spends", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_spends_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -40,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_203943) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "spends", "users"
   add_foreign_key "transactions", "payers"
   add_foreign_key "transactions", "users"
 end
