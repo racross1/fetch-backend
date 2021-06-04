@@ -8,11 +8,12 @@ def create
     #all of the below needs to be tested and connected to frontend. just coded here in order to shape how model methods done
     amount = transaction_params[:init_amount]
     user = User.find(transaction_params[:user_id])
-    user_bal = user['pts_balance']
+    user_bal = user.pts_balance
 
-    if amount > user_bal
-        render json: { error: 'failed to create user' }
+    if amount < 0 && amount.abs() > user_bal 
+        render json: { error: 'insufficient funds' }
     else  
+        #transactions will have payer id of nil if it is a spend
         transaction = Transaction.create(user_id: transaction_params[:user_id], transaction_params[:payer_id], init_amount: amount, active_amount: amount)
         transaction_summary = transaction.process_new_transaction
         render json: transaction_summary

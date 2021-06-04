@@ -36,17 +36,18 @@ class Transaction < ApplicationRecord
     #where to do check for no nonzero
     #here i think -> if amount > user pts bal then errror message
 
-  def process_new_transaction(transaction)
-    user = User.find(transaction[user_id])
-    payer = Payer.find(transaction[payer_id])
-    amount = transaction[init_amount]
+  def process_new_transaction
+    user = User.find(self.user_id)
+    payer = Payer.find(self.payer_id)
+    amount = self.init_amount
 
-    user_bal = user[pts_balance]
-    payer_bal = payer[pts_balance]
+    user_bal = user.pts_balance
+    payer_bal = payer.pts_balance
 
     #this check is done in transaction controller within create method
     #repeated here in case of use in CLI / for adding transactions in seed file
-    if amount > user_bal 
+    if amount < 0 && amount.abs() > user_bal 
+      self.destroy
       puts "insufficient funds - add more points!"
       return 
     end 
@@ -55,6 +56,8 @@ class Transaction < ApplicationRecord
     if amount >= 0
       user.update(pts_balance: user_bal + amount)
       payer.update(pts_balance: payer_bal + amount)
+      puts user.pts_balance
+      puts payer.pts_balance
       #tbd what gets returned here
       #have separate method to check if it's a valid transaction (to be used in controller and here)? 
       return 
@@ -72,8 +75,10 @@ class Transaction < ApplicationRecord
   def get_transaction_output(active_transactions, amount)
     running_sum = amount
     i = 0
-    while running_sum > 0
+    while running_sum > 0 do
       curr = active_transactions[i]
+
+      #if 
 
       #logic here for running total that finds cutoff point then allocates
       #to payers accordingly
