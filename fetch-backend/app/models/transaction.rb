@@ -18,13 +18,13 @@ class Transaction < ApplicationRecord
     user_bal = user.pts_balance
     payer_bal = payer.pts_balance
 
+    self.save
+
     user.update(pts_balance: user_bal + amount)
     payer.update(pts_balance: payer_bal + amount)
     puts user.pts_balance
     puts payer.pts_balance
-    #tbd what gets returned here
-    #have separate method to check if it's a valid transaction (to be used in controller and here)? 
-    return 
+    return [user.pts_balance, payer.pts_balance]
   end
 
 end
