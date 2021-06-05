@@ -1,5 +1,5 @@
 class SpendsController < ApplicationController
-    #add logic for receiving transaction params
+    
     def create
         amount = transaction_params[:init_amount]
         user = User.find(transaction_params[:user_id])

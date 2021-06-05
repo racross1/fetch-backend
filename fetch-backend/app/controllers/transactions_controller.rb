@@ -8,11 +8,10 @@ class TransactionsController < ApplicationController
         transaction = Transaction.new(user_id: transaction_params[:user_id], transaction_params[:payer_id], init_amount: amount, active_amount: amount)
         new_balances = transaction.process_new_transaction
         render json: new_balances
-
     end 
 
 
-private
+    private
 
     def transaction_params 
         params.require(:transaction).permit(:user_id, :payer_id, :init_amout)
