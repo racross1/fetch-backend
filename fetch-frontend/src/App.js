@@ -44,9 +44,19 @@ class App extends React.Component{
         .then(data => {
           let newUserPtsBalance = data.updated_user_pts
           let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
+          let newPayers = this.state.payers.slice()
+         console.log(this.state.payers[0].id === 88)
+          let payerToUpdate = this.state.payers.find(p => p.id = parseInt(data.payer))
+          let payerIdxToUpdate = newPayers.indexOf(payerToUpdate)
+          console.log(payerIdxToUpdate)
+          payerToUpdate.pts_balance = parseInt(data.updated_payer_pts)
+          newPayers[payerIdxToUpdate] = payerToUpdate
+
+
           console.log(data)
           this.setState({
-            user: updatedUser
+            user: updatedUser,
+            payers: newPayers
           })
         })
 
@@ -62,7 +72,7 @@ class App extends React.Component{
         <>
         {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn}/> 
         }
-        <AdminView/>
+        <AdminView payers={this.state.payers}/>
         </>
         )
       }

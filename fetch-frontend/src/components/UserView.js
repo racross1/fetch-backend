@@ -26,9 +26,11 @@ class UserView extends React.Component{
     
 
     handlePayerChange = (e) => {
+     
         this.setState({
             payerId: e.target.value
         })
+
     }
 
     handleAmountChange = (e) => {
@@ -39,28 +41,45 @@ class UserView extends React.Component{
 
     handleSubmit = (e) => {
         e.preventDefault()
+        if(this.state.payerId == '' || this.state.amount == ''){
+            alert('When earning points, no blank fields!')
+           
+        } else {
         this.props.handleEarn(this.state.payerId, this.state.amount)
+        }
 
+       this.resetDropdown()
+
+    }
+
+     resetDropdown() {
+        let dropDown = document.getElementById('earn-points');
+        dropDown.selectedIndex = 0;
     }
 
     render(){
         return (
-
+        
             <div id='half-containers'>
-            {this.props.user.username}
+            User View
+            <br></br> <br></br>
+            Welcome {this.props.user.username}!
+            <br></br> <br></br>
             <div className='row'>
                     <div className='column'>Earn Points
                         <Form id='earn-points' onSubmit={(e) => this.handleSubmit(e)}>
                             <Form.Group controlId="earn-points">
+                          
                             <select onChange={(e) => this.handlePayerChange(e)}>
-                        
+                          
+                            <option  disabled selected>Select Partner</option>
                                 {this.props.payers.map(p => {
                                     return <option value={`${p.id}`}>{p.name}</option>
                                     })
                                 }
                             </select>
                             <select onChange={(e) => this.handleAmountChange(e)}>
-                                
+                            <option  disabled selected>Select Amount</option>
                                 {pointValues.map(pv => {
                                     return <option value={`${pv}`}>{pv}</option>
                                     })
@@ -71,8 +90,8 @@ class UserView extends React.Component{
                 </Form>
                     
                     </div>
-                    <div className='column'>Your Current Point Balance: {this.props.user.pts_balance}</div>
-                    <div className='column'>more stuff</div>
+                    <div className='column'><strong>Your Current Point Balance:</strong> <br></br>{this.props.user.pts_balance}</div>
+                    <div className='column'>Spend Points</div>
                 </div>
             </div>
         )
