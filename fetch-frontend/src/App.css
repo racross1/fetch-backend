@@ -1,0 +1,88 @@
+.App {
+  text-align: center;
+}
+
+html,
+body {
+  margin: 5px;
+  height: 100%;
+}
+
+div {
+  box-sizing: border-box;
+  /* border: 0.5px solid black; */
+ 
+
+}
+
+.main-container {
+  height: 100%;
+  display: flex;
+  
+}
+
+/* .left-container {
+  flex: 1 1 0;
+}
+
+.right-container {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+} */
+
+.half-containers {
+  flex: 1;
+  overflow: auto;
+  padding: 5px;
+  box-sizing: border-box;
+  border: 0.5px solid black !important;
+
+  
+}
+
+/* .mid-container {
+  flex: 1 1 0;
+  float:left;
+ 
+} */
+
+
+.column {
+  float: left;
+  width: 33.33%;
+  border:none !important;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  border:none !important;
+}
+
+
+
+/* html, body {
+  height:100%;
+  padding:10px;
+  margin:0;
+}
+.container {
+  display: grid
+
+}
+.top {
+  min-height:50%;
+  max-height: 50%;
+  margin-bottom: 5px;
+  border: solid black
+ 
+}
+.bottom {
+  min-height:50%;
+
+  margin-top: 5px;
+  border-style: solid black
+} */
