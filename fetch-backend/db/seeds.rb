@@ -27,8 +27,12 @@ s1 = Spend.new(user_id: u1.id, amount: -500)
 s1.process_spend
 s2 = Spend.new(user_id: u1.id, amount: -600)
 s2.process_spend
+
+puts User.last.pts_balance
+
 s3 = Spend.new(user_id: u1.id, amount: -100)
 s3.process_spend
+
 # puts `user bals: #{User.all}`
 puts User.last.pts_balance
 
