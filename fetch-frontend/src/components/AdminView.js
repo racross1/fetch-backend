@@ -7,10 +7,10 @@ class AdminView extends React.Component{
         return (
             <div id='half-containers'>
                 Admin view
-                <div class='row'>
-                    <div class='column'>stuff</div>
-                    <div class='column'>other stuff</div>
-                    <div class='column'>more stuff</div>
+                <div className='row'>
+                    <div className='column'>stuff</div>
+                    <div className='column'>other stuff</div>
+                    <div className='column'>more stuff</div>
                 </div>
             </div>
         )

@@ -8,6 +8,7 @@ class Login extends React.Component{
     }
 
     handleChangeUsername = (e) => {
+        
         this.setState({
             username: e.target.value
         })
@@ -17,6 +18,7 @@ class Login extends React.Component{
         e.preventDefault() 
        
         let newUsername = this.state.username
+       
         fetch('http://localhost:3000/users', {
             method: "POST",
             headers: {
@@ -25,7 +27,7 @@ class Login extends React.Component{
             body: JSON.stringify({'username': newUsername}),
         })
         .then(resp => resp.json())
-        .then(registeredUser => this.props.showLogin(registeredUser, true))
+        .then(registeredUser => this.props.handleLogin(registeredUser, true))
     }
 
     render(){
