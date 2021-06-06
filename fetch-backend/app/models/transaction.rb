@@ -24,7 +24,7 @@ class Transaction < ApplicationRecord
     payer.update(pts_balance: payer_bal + amount)
     puts user.pts_balance
     puts payer.pts_balance
-    return [user.pts_balance, payer.pts_balance]
+    return {"updated_user_pts": user.pts_balance, "payer": payer.id,"updated_payer_pts": payer.pts_balance, "spend_transaction": self}
   end
 
 end
