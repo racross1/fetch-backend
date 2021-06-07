@@ -18,6 +18,7 @@ class App extends React.Component{
 
   componentDidMount(){
     this.getPayers()
+    
   }
   
   getPayers = () => {
@@ -26,11 +27,21 @@ class App extends React.Component{
     .then(payers => this.setState({payers: [...payers]}))
   }
 
+  getEarns = () => {
+    let userId = this.state.user.id
+
+    fetch(`http://localhost:3000/transactions/?user_id=${this.state.user.id}`)
+    .then(resp => resp.json())
+    .then(earnTransactions => console.log(earnTransactions))
+  }
+
   handleLogin = (user, bool) => {
     this.setState({
       loggedIn: bool,
       user: user
       })
+
+      this.getEarns()
   }
 
   handleEarn = (payer, amount) => {
@@ -68,7 +79,7 @@ class App extends React.Component{
         <>
         {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn}/> 
         }
-        <AdminView payers={this.state.payers}/>
+        <AdminView payers={this.state.payers} earns={this.state.earns}/>
         </>
         )
       }

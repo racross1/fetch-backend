@@ -32,7 +32,13 @@ class AdminView extends React.Component{
                     
                     
                     </div>
-                    <div className='column'>Earn Tranasctions</div>
+                    <div className='column'>Earn Tranasctions
+                    <ul>
+                        {this.props.earns}
+
+                    </ul>
+                    
+                    </div>
                     <div className='column'>Spend Transactions</div>
                 </div>
             </div>

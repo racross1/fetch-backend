@@ -94,15 +94,6 @@ class UserView extends React.Component{
                     <div className='column'>Spend Points
                     <Form id='spend-points' onSubmit={(e) => this.handleSpendSubmit(e)}>
                             <Form.Group controlId="earn-points">
-                          
-                            <select onChange={(e) => this.handleSpendPayerChange(e)}>
-                          
-                            <option  disabled selected>Select Partner</option>
-                                {this.props.payers.map(p => {
-                                    return <option value={`${p.id}`}>{p.name}</option>
-                                    })
-                                }
-                            </select>
                             <select onChange={(e) => this.handleSpendAmountChange(e)}>
                             <option  disabled selected>Select Amount</option>
                                 {pointValues.map(pv => {
