@@ -16,15 +16,15 @@ class Transaction < ApplicationRecord
     amount = self.init_amount
 
     user_bal = user.pts_balance
-    payer_bal = payer.pts_balance
+    payer_bal = user.get_payer_bals[payer_id]
 
     self.save
 
     user.update(pts_balance: user_bal + amount)
-    payer.update(pts_balance: payer_bal + amount)
-    puts user.pts_balance
-    puts payer.pts_balance
-    return {"updated_user_pts": user.pts_balance, "payer": payer.id,"updated_payer_pts": payer.pts_balance, "spend_transaction": self}
+    # payer.update(pts_balance: payer_bal + amount)
+    payer_bal += amount
+    
+    return {"updated_user_pts": user.pts_balance, "payer": payer.id, "updated_payer_pts": payer_bal, "earn_transaction": self}
   end
 
 end

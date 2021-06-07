@@ -21,20 +21,20 @@ t4.process_new_transaction
 t5 = Transaction.create(user_id: u1.id, payer_id: p2.id, init_amount: 500, active_amount: 500)
 t5.process_new_transaction
 
-puts User.last.pts_balance
+# puts User.last.pts_balance
 
 s1 = Spend.new(user_id: u1.id, amount: -500)
 s1.process_spend
 s2 = Spend.new(user_id: u1.id, amount: -600)
 s2.process_spend
 
-puts User.last.pts_balance
+# puts User.last.pts_balance
 
 s3 = Spend.new(user_id: u1.id, amount: -100)
 s3.process_spend
 
 # puts `user bals: #{User.all}`
-puts User.last.pts_balance
+# puts User.last.pts_balance
 
 
 puts "done"
