@@ -17,20 +17,24 @@ class App extends React.Component{
   }
 
   componentDidMount(){
-    this.getPayers()
-    
-  }
-  
-  getPayers = () => {
     fetch('http://localhost:3000/payers')
     .then(resp => resp.json())
     .then(payers => this.setState({payers: [...payers]}))
+    .then(this.getEarns())
+    
+  }
+  
+  // /users/:id/payerbals
+  getPayerBals = () => {
+    let userId = this.state.user.id
+    //do this fetch to user model
+    fetch(`http://localhost:3000/users/${userId}/earns`)
+    .then(resp => resp.json())
+    .then(payerBals => console.log(payerBals))
   }
 
-  getEarns = () => {
-    let userId = this.state.user.id
-
-    fetch(`http://localhost:3000/transactions/?user_id=${this.state.user.id}`)
+  getEarns = (userId) => {
+    fetch(`http://localhost:3000/users/${userId}/earns`)
     .then(resp => resp.json())
     .then(earnTransactions => console.log(earnTransactions))
   }
@@ -41,7 +45,8 @@ class App extends React.Component{
       user: user
       })
 
-      this.getEarns()
+      this.getEarns(user.id)
+
   }
 
   handleEarn = (payer, amount) => {
@@ -62,9 +67,10 @@ class App extends React.Component{
 
           this.setState({
             user: updatedUser,
-            earns: [...this.state.earns, data.spend_transaction]
+            earns: [...this.state.earns, data.earn_transaction]
           })
         })
+        //still have get payers call because a new payer may have been added with earn
         this.getPayers()
 
   }

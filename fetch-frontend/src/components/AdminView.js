@@ -24,7 +24,7 @@ class AdminView extends React.Component{
                                 {this.props.payers.map(p => {
                                     return (<tr key={p.id}>
                                         <td>{p.name}</td>
-                                        <td>{p.pts_balance}</td>
+                                        <td></td>
                                         </tr>)
                                 })}
                             </tbody>

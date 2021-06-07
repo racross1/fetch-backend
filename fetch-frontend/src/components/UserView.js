@@ -26,7 +26,6 @@ class UserView extends React.Component{
     
 
     handlePayerChange = (e) => {
-     
         this.setState({
             payerId: e.target.value
         })
@@ -39,23 +38,23 @@ class UserView extends React.Component{
         })
     }
 
-    handleSubmit = (e) => {
+    handleEarnSubmit = (e) => {
         e.preventDefault()
         if(this.state.payerId === '' || this.state.amount === ''){
             alert('When earning points, no blank fields!')
            
         } else {
-        this.props.handleEarn(this.state.payerId, this.state.amount)
+            this.props.handleEarn(this.state.payerId, this.state.amount)
         }
 
-       this.resetDropdown()
+    //    this.resetDropdown()
 
     }
 
-     resetDropdown() {
-        let dropDown = document.getElementById('earn-points');
-        dropDown.selectedIndex = 0;
-    }
+    //  resetDropdown() {
+    //     let dropDown = document.getElementById('earn-points');
+    //     dropDown.selectedIndex = 0;
+    // }
 
     render(){
         return (
@@ -67,7 +66,7 @@ class UserView extends React.Component{
             <br></br> <br></br>
             <div className='row'>
                     <div className='column'>Earn Points
-                        <Form id='earn-points' onSubmit={(e) => this.handleSubmit(e)}>
+                        <Form id='earn-points' onSubmit={(e) => this.handleEarnSubmit(e)}>
                             <Form.Group controlId="earn-points">
                           
                             <select onChange={(e) => this.handlePayerChange(e)}>
