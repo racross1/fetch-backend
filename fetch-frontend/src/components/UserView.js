@@ -1,7 +1,7 @@
 import React from 'react' 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Dropdown from 'react-bootstrap/Dropdown'
+
  
 const pointValues = [
     50,
@@ -41,7 +41,7 @@ class UserView extends React.Component{
 
     handleSubmit = (e) => {
         e.preventDefault()
-        if(this.state.payerId == '' || this.state.amount == ''){
+        if(this.state.payerId === '' || this.state.amount === ''){
             alert('When earning points, no blank fields!')
            
         } else {
@@ -91,7 +91,29 @@ class UserView extends React.Component{
                     
                     </div>
                     <div className='column'><strong>Your Current Point Balance:</strong> <br></br>{this.props.user.pts_balance}</div>
-                    <div className='column'>Spend Points</div>
+                    <div className='column'>Spend Points
+                    <Form id='spend-points' onSubmit={(e) => this.handleSpendSubmit(e)}>
+                            <Form.Group controlId="earn-points">
+                          
+                            <select onChange={(e) => this.handleSpendPayerChange(e)}>
+                          
+                            <option  disabled selected>Select Partner</option>
+                                {this.props.payers.map(p => {
+                                    return <option value={`${p.id}`}>{p.name}</option>
+                                    })
+                                }
+                            </select>
+                            <select onChange={(e) => this.handleSpendAmountChange(e)}>
+                            <option  disabled selected>Select Amount</option>
+                                {pointValues.map(pv => {
+                                    return <option value={`${pv}`}>{pv}</option>
+                                    })
+                                }
+                            </select>
+                </Form.Group>
+                <Button type="submit">Spend!</Button><br></br>
+                </Form>
+                    </div>
                 </div>
             </div>
         )

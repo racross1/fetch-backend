@@ -17,11 +17,15 @@ class App extends React.Component{
   }
 
   componentDidMount(){
+    this.getPayers()
+  }
+  
+  getPayers = () => {
     fetch('http://localhost:3000/payers')
     .then(resp => resp.json())
     .then(payers => this.setState({payers: [...payers]}))
-}
-  
+  }
+
   handleLogin = (user, bool) => {
     this.setState({
       loggedIn: bool,
@@ -30,7 +34,6 @@ class App extends React.Component{
   }
 
   handleEarn = (payer, amount) => {
-    console.log(payer, amount)
     let newEarn = {"user_id": parseInt(this.state.user.id), "payer_id": parseInt(payer), "init_amount": parseInt(amount)}
        
         fetch('http://localhost:3000/transactions', {
@@ -42,23 +45,16 @@ class App extends React.Component{
         })
         .then(resp => resp.json())
         .then(data => {
+          console.log(data)
           let newUserPtsBalance = data.updated_user_pts
           let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
-          let newPayers = this.state.payers.slice()
-         console.log(this.state.payers[0].id === 88)
-          let payerToUpdate = this.state.payers.find(p => p.id = parseInt(data.payer))
-          let payerIdxToUpdate = newPayers.indexOf(payerToUpdate)
-          console.log(payerIdxToUpdate)
-          payerToUpdate.pts_balance = parseInt(data.updated_payer_pts)
-          newPayers[payerIdxToUpdate] = payerToUpdate
 
-
-          console.log(data)
           this.setState({
             user: updatedUser,
-            payers: newPayers
+            earns: [...this.state.earns, data.spend_transaction]
           })
         })
+        this.getPayers()
 
   }
 
