@@ -14,7 +14,8 @@ class App extends React.Component{
     earns: [],
     spends: [],
     payers: [],
-    payerBals: []
+    payerBals: [],
+    latest_spend: []
   }
 
   componentDidMount(){
@@ -72,7 +73,7 @@ class App extends React.Component{
           
           this.setState({
             user: updatedUser,
-            payerBals: updatedPayerBals
+          
 
           })
         })
@@ -80,6 +81,7 @@ class App extends React.Component{
         //still have get payers call because a new payer may have been added with earn
         // this.getPayerBals(this.state.user.id)
         this.getEarns(this.state.user.id)
+        this.getPayerBals(this.state.user.id)
   }
 
   handleSpend = (amount) => {
@@ -94,8 +96,20 @@ class App extends React.Component{
       body: JSON.stringify(newSpend),
       })
       .then(resp => resp.json())
-      .then(spendTransactions => console.log(spendTransactions))
+      .then(data => {
+        console.log(data)
+        let newUserPtsBalance = data.updated_user_pts
+        let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
+        let updatedPayerBals = data.payer_bals
+      
+        this.setState({
+          user: updatedUser,
+          payerBals: updatedPayerBals
 
+        })
+
+      
+      })
 
     
   }

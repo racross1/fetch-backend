@@ -13,7 +13,7 @@ class AdminView extends React.Component{
 
     render(){
         // console.log(this.props.payerBals)
-        this.payerBalsToIter()
+       
         return (
             <div id='half-containers'>
                 Admin View

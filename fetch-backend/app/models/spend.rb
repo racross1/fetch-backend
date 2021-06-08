@@ -60,12 +60,19 @@ class Spend < ApplicationRecord
         curr.update(active_amount: curr_amount - diff)
 
       end 
+
+
+    
+    
+
+
+      #how to update payer bals
       
     end 
 
     user.update(pts_balance: user_pts - amount)
     #returns spend output and updated payer bals for this user
-    return ["spend_output": spend_output, "payer_bals": user.get_payer_bals, "updated_user_pts": user.pts_balance]
+    return {"spend_output": spend_output, "payer_bals": payers, "updated_user_pts": user.pts_balance}
 
   end
 
