@@ -21,7 +21,8 @@ const pointValues = [
 class UserView extends React.Component{
     state = {
         payerId: '',
-        amount: ''
+        amount: '',
+        spendAmount:''
     }
     
 
@@ -32,7 +33,7 @@ class UserView extends React.Component{
 
     }
 
-    handleAmountChange = (e) => {
+    handleEarnAmountChange = (e) => {
         this.setState({
             amount: e.target.value
         })
@@ -51,10 +52,26 @@ class UserView extends React.Component{
 
     }
 
-    //  resetDropdown() {
-    //     let dropDown = document.getElementById('earn-points');
-    //     dropDown.selectedIndex = 0;
-    // }
+
+    handleSpendAmountChange = (e) => {
+        this.setState({
+            spendAmount: e.target.value
+        })
+    }
+
+    handleSpendSubmit = (e) => {
+        e.preventDefault()
+        if(this.state.spendAmount === ''){
+            alert('Must choose an amount to spend!')
+           
+        } else {
+            this.props.handleSpend(this.state.spendAmount)
+        }
+
+    //    this.resetDropdown()
+
+    }
+  
 
     render(){
         return (
@@ -77,7 +94,7 @@ class UserView extends React.Component{
                                     })
                                 }
                             </select>
-                            <select onChange={(e) => this.handleAmountChange(e)}>
+                            <select onChange={(e) => this.handleEarnAmountChange(e)}>
                             <option  disabled selected>Select Amount</option>
                                 {pointValues.map(pv => {
                                     return <option value={`${pv}`}>{pv}</option>

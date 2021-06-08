@@ -20,6 +20,7 @@ class App extends React.Component{
   componentDidMount(){
     fetch('http://localhost:3000/payers')
     .then(resp => resp.json())
+    // .then(payers => console.log(payers))
     .then(payers => this.setState({payers: [...payers]}))
   }
   
@@ -79,7 +80,24 @@ class App extends React.Component{
         //still have get payers call because a new payer may have been added with earn
         // this.getPayerBals(this.state.user.id)
         this.getEarns(this.state.user.id)
+  }
 
+  handleSpend = (amount) => {
+    let userId = this.state.user.id
+    let newSpend =  {"user_id": parseInt(userId), "amount": parseInt(amount)}
+
+    fetch('http://localhost:3000/spends', {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      }, 
+      body: JSON.stringify(newSpend),
+      })
+      .then(resp => resp.json())
+      .then(spendTransactions => console.log(spendTransactions))
+
+
+    
   }
 
   
@@ -90,7 +108,7 @@ class App extends React.Component{
         <Login handleLogin={this.handleLogin}/>
         ) : (
         <>
-        {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn}/> 
+        {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn} handleSpend={this.handleSpend}/> 
         }
         <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals}/>
         </>

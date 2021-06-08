@@ -12,6 +12,7 @@ class Spend < ApplicationRecord
       return false
     else
       self.save
+     
       active_transactions = user.get_sorted_active_transactions 
       output = self.get_spend_output(active_transactions, amount)
     end
@@ -27,16 +28,18 @@ class Spend < ApplicationRecord
     i = 0
     spend_output = []
     amount = amount.abs()
+
     user = User.find(active_transactions[0].user_id)
     user_pts = user.pts_balance
     payers = user.get_payer_bals
 
     while running_sum < amount do
+      # byebug
       curr = active_transactions[i]
       curr_amount = curr.active_amount
       curr_payer = Payer.find(curr.payer_id)
-      curr_payer_pts_bal = payers[curr_payer]
-
+      curr_payer_pts_bal = payers[curr.payer_id]
+      # byebug
       if running_sum  + curr_amount <= amount
         running_sum += curr_amount
       
@@ -62,7 +65,7 @@ class Spend < ApplicationRecord
 
     user.update(pts_balance: user_pts - amount)
     #returns spend output and updated payer bals for this user
-    return [spend_output, user.get_payer_bals]
+    return ["spend_output": spend_output, "payer_bals": user.get_payer_bals, "updated_user_pts": user.pts_balance]
 
   end
 
