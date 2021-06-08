@@ -3,9 +3,17 @@ import Table from 'react-bootstrap/Table'
 
 
 class AdminView extends React.Component{
+    payerBalsToIter = () => {
+        let payerBals = this.props.payerBals
+        let iter = Object.entries(payerBals);
+       return iter
+    
+
+    }
 
     render(){
-        console.log(this.props.payers)
+        // console.log(this.props.payerBals)
+        this.payerBalsToIter()
         return (
             <div id='half-containers'>
                 Admin View
@@ -21,10 +29,10 @@ class AdminView extends React.Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.payers.map(p => {
-                                    return (<tr key={p.id}>
-                                        <td>{p.name}</td>
-                                        <td></td>
+                                {(this.payerBalsToIter()).map(p => {
+                                    return (<tr key={p[0]}>
+                                        <td>{p[0]}</td>
+                                        <td>{p[1]}</td>
                                         </tr>)
                                 })}
                             </tbody>
@@ -32,9 +40,9 @@ class AdminView extends React.Component{
                     
                     
                     </div>
-                    <div className='column'>Earn Tranasctions
+                    <div className='column'>Earn Tranasctions Not Yet Spent
                     <ul>
-                        {this.props.earns}
+                      
 
                     </ul>
                     

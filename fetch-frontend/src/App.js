@@ -13,30 +13,30 @@ class App extends React.Component{
     user: false, 
     earns: [],
     spends: [],
-    payers: []
+    payers: [],
+    payerBals: []
   }
 
   componentDidMount(){
     fetch('http://localhost:3000/payers')
     .then(resp => resp.json())
     .then(payers => this.setState({payers: [...payers]}))
-    .then(this.getEarns())
-    
   }
   
   // /users/:id/payerbals
-  getPayerBals = () => {
-    let userId = this.state.user.id
-    //do this fetch to user model
-    fetch(`http://localhost:3000/users/${userId}/earns`)
+  getPayerBals = (userId) => {
+    
+    fetch(`http://localhost:3000/users/${userId}/payerbals`)
     .then(resp => resp.json())
-    .then(payerBals => console.log(payerBals))
+    .then(payerBals => this.setState({payerBals: payerBals}))
   }
 
   getEarns = (userId) => {
+    
     fetch(`http://localhost:3000/users/${userId}/earns`)
     .then(resp => resp.json())
     .then(earnTransactions => console.log(earnTransactions))
+      // this.setState({earns: [...earnTransactions]}))
   }
 
   handleLogin = (user, bool) => {
@@ -46,6 +46,7 @@ class App extends React.Component{
       })
 
       this.getEarns(user.id)
+      this.getPayerBals(user.id)
 
   }
 
@@ -61,17 +62,23 @@ class App extends React.Component{
         })
         .then(resp => resp.json())
         .then(data => {
-          console.log(data)
+          
           let newUserPtsBalance = data.updated_user_pts
           let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
-
+          let payerName = data.payer_name
+          let updatedPayerBals = {...this.state.payerBals}
+          updatedPayerBals[payerName] = data.updated_payer_pts
+          
           this.setState({
             user: updatedUser,
-            earns: [...this.state.earns, data.earn_transaction]
+            payerBals: updatedPayerBals
+
           })
         })
+
         //still have get payers call because a new payer may have been added with earn
-        this.getPayers()
+        // this.getPayerBals(this.state.user.id)
+        this.getEarns(this.state.user.id)
 
   }
 
@@ -85,7 +92,7 @@ class App extends React.Component{
         <>
         {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn}/> 
         }
-        <AdminView payers={this.state.payers} earns={this.state.earns}/>
+        <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals}/>
         </>
         )
       }

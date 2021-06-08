@@ -8,8 +8,8 @@ class UsersController < ApplicationController
     def get_earns 
         user = User.find(params['id'])
         #sorted in descending order so that oldest transactions are at the top in frontend display
-        earnTransactions = user.transactions.sort_by{|t| t.created_at}.reverse() 
-        render json: earnTransactions
+        sortedActiveTransactions = user.get_sorted_active_transactions
+        render json: sortedActiveTransactions.reverse().to_a
     end 
 
     def get_spends 
@@ -19,9 +19,9 @@ class UsersController < ApplicationController
 
     def get_payer_bals
         user = User.find(params['id'])
-        payerBals = user.get_payer_bals
+        namedPayerBals = user.get_named_payer_bals
 
-        render json: payerBals
+        render json: namedPayerBals
     end 
 
     private 

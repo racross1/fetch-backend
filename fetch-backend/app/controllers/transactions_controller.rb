@@ -1,13 +1,13 @@
 class TransactionsController < ApplicationController
 
-    def index
-        byebug
-        earnTransactions = user.transactions.sort_by{|t| t.created_at}
-        latestTen = earnTransactions.slice(0,10)
+    # def index
+    #     byebug
+    #     earnTransactions = user.transactions.sort_by{|t| t.created_at}
+    #     latestTen = earnTransactions.slice(0,10)
 
-        render json: latestTen
+    #     render json: latestTen
     
-    end
+    # end
 
     def create
         amount = transaction_params["init_amount"].to_i
