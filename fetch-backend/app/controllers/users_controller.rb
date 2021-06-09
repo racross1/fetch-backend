@@ -21,9 +21,11 @@ class UsersController < ApplicationController
 
     def get_payer_bals
         user = User.find(params['id'])
-        namedPayerBals = user.get_named_payer_bals
+       
+        # namedPayerBals = user.get_named_payer_bals
+        payerBals = user.get_payer_bals
 
-        render json: namedPayerBals
+        render json: payerBals
     end 
 
     private 

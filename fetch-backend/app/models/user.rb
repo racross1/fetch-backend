@@ -14,20 +14,28 @@ class User < ApplicationRecord
         return sorted
     end 
     
-    #creates hash of payer_bals with payer id as key and points as value
+    #creates hash of payer_bals with payer id as key and payer [points, name] as value
     def get_payer_bals
         activeUserTransactions = self.get_active_transactions
-        payers = {}
+        payerBals = {}
         
         activeUserTransactions.each do |t|
             payer_id = t.payer_id
-            if !payers.has_key?(payer_id)
-                payers[payer_id] = 0
-            end 
-            payers[payer_id] += t.active_amount
+            payer = Payer.find(payer_id)
+            
+        #     if !payers.has_key?(payer_id)
+        #         payers[payer_id] = 0
+        #     end 
+        #     payers[payer_id] += t.active_amount
+        # end 
+
+        if !payerBals.has_key?(payer_id)
+            payerBals[payer_id] = [0, payer.name]
         end 
+        payerBals[payer_id][0] += t.active_amount
+    end 
         
-        return payers
+        return payerBals
     end 
 
     def get_named_payer_bals

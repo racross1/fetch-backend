@@ -6,6 +6,7 @@ class AdminView extends React.Component{
     payerBalsToIter = () => {
         let payerBals = this.props.payerBals
         let iter = Object.entries(payerBals);
+        
        return iter
     }
 
@@ -29,8 +30,8 @@ class AdminView extends React.Component{
                             <tbody>
                                 {(this.payerBalsToIter()).map(p => {
                                     return (<tr key={p[0]}>
-                                        <td>{p[0]}</td>
-                                        <td>{p[1]}</td>
+                                        <td>{p[1][1]}</td>
+                                        <td>{p[1][0]}</td>
                                         </tr>)
                                 })}
                             </tbody>

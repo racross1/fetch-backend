@@ -74,13 +74,14 @@ class App extends React.Component{
         })
         .then(resp => resp.json())
         .then(data => {
-          
+         
           let newUserPtsBalance = data.updated_user_pts
           let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
-          let payerName = data.payer_name
+          let payerId = data.payer.id
           let updatedPayerBals = {...this.state.payerBals}
-          updatedPayerBals[payerName] = data.updated_payer_pts
-          
+          updatedPayerBals[payerId]= data.updated_payer_pts
+        
+
           this.setState({
             user: updatedUser,
             payerBals: updatedPayerBals

@@ -28,9 +28,9 @@ class Transaction < ApplicationRecord
     payer_bal = user.update_payer_bal(payer.id, amount)
     #  payer_bal = (user.get_payer_bals)[payer_id]
     # byebug
-    payerName = payer.name
+    # payerName = payer.name
 
-    return {"updated_user_pts": user.pts_balance, "payer_name": payerName, "updated_payer_pts": payer_bal, "earn_transaction": self}
+    return {"updated_user_pts": user.pts_balance, "payer": payer, "updated_payer_pts": payer_bal, "earn_transaction": self}
     # return {"updated_user_pts": user.pts_balance,  "earn_transaction": self}
   end
 
