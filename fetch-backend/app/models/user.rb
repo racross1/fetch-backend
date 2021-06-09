@@ -22,12 +22,6 @@ class User < ApplicationRecord
         activeUserTransactions.each do |t|
             payer_id = t.payer_id
             payer = Payer.find(payer_id)
-            
-        #     if !payers.has_key?(payer_id)
-        #         payers[payer_id] = 0
-        #     end 
-        #     payers[payer_id] += t.active_amount
-        # end 
 
         if !payerBals.has_key?(payer_id)
             payerBals[payer_id] = [0, payer.name]
@@ -50,22 +44,13 @@ class User < ApplicationRecord
     end 
 
     def update_payer_bal(payer_id, transactionAmount)
-        #getpayerbals returns hash with key of payer id and value of bal
         payers = self.get_payer_bals
         if !payers.has_key?(payer_id)
             payers[payer_id] = 0
             payers[payer_id] += transactionAmount
         end 
         
-        
-
-        # byebug
-        # output_amount = payers[payer_id]
-        # return output_amount
-
-        # output_amount = payers[payer_id]
         return payers[payer_id]
-
 
     end
 

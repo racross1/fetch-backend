@@ -1,10 +1,8 @@
 class SpendsController < ApplicationController
     
     def create
-
         amount = spend_params[:amount]
         user = User.find(spend_params[:user_id])
-        # user_bal = user.pts_balance
 
         spend = Spend.new(user_id: user.id, amount: amount)
         result = spend.process_spend

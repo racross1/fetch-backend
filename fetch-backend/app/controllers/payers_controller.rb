@@ -3,8 +3,5 @@ class PayersController < ApplicationController
         payers = Payer.all 
         render json: payers
     end
-
-    def show
-    end
     
 end
