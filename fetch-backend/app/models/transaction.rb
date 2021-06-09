@@ -2,12 +2,14 @@ class Transaction < ApplicationRecord
   belongs_to :user
   belongs_to :payer
 
-  def self.get_active_transactions
-     active_transactions = Transaction.all.select{|t| t.active_amount != 0}
-     sorted_active_transactions = active_transactions.sort_by{|t| t.created_at}
-     
-     return sorted_active_transactions
-  end 
+  # def self.get_active_transactions
+  #    active_transactions = Transaction.all.select{|t| t.active_amount != 0}
+  #    sorted_active_transactions = active_transactions.sort_by{|t| t.created_at}
+  #    output = []
+  #    sorted_active_transactions.each{|t| output << [t, Payer.find(t.payer_id).name]}
+
+  #    return output
+  # end 
 
   
   def process_new_transaction

@@ -1,5 +1,6 @@
 import React from 'react' 
 import Table from 'react-bootstrap/Table' 
+import moment from 'moment'
 
 
 class AdminView extends React.Component{
@@ -10,9 +11,20 @@ class AdminView extends React.Component{
        return iter
     }
 
+    earnsToIter = () => {
+        let earns = this.props.earns
+        let iter = earns.map(e => {
+            let name = this.props.payers.find(p => p.id === e.payer_id).name
+            return [name, e.init_amount, e.active_amount, moment(e.created_at).format('MMMM Do YYYY, h:mm:ss a')]
+
+        })
+       return iter
+    }
+
     render(){
-        // console.log(this.props.spend)
-       
+        // console.log(this.props.earns)
+       let earns = this.earnsToIter()
+       let payerBals = this.payerBalsToIter()
         return (
             <div id='half-containers'>
                 Admin View
@@ -28,7 +40,7 @@ class AdminView extends React.Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                {(this.payerBalsToIter()).map(p => {
+                                {payerBals.map(p => {
                                     return (<tr key={p[0]}>
                                         <td>{p[1][1]}</td>
                                         <td>{p[1][0]}</td>
@@ -40,10 +52,26 @@ class AdminView extends React.Component{
                     
                     </div>
                     <div className='column'>Earned Points Not Yet Spent
-                    <ul>
-                      
-
-                    </ul>
+                    <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                <th>Payer</th>
+                                <th>Total Points Earned</th>
+                                <th>Points Remaining</th>
+                                <th>Earn Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {earns.map(p => {
+                                    return (<tr key={p[3]}>
+                                        <td>{p[0]}</td>
+                                        <td>{p[1]}</td>
+                                        <td>{p[2]}</td>
+                                        <td>{p[3]}</td>
+                                        </tr>)
+                                })}
+                            </tbody>
+                            </Table>
                     
                     </div>
                     <div className='column'>Latest Spend Transaction</div>

@@ -37,8 +37,17 @@ class App extends React.Component{
     
     fetch(`http://localhost:3000/users/${userId}/earns`)
     .then(resp => resp.json())
-    .then(earnTransactions => console.log(earnTransactions))
+    .then(earnTransactions =>{
+      // console.log(this.state.payers)
+      // earnTransactions.forEach(e => {
+      //   console.log(this.state.payers.find(p => p.id === e.payer_id))
+
+      // })
+      this.setState({earns: earnTransactions})
+
+      }
       // this.setState({earns: [...earnTransactions]}))
+    )
   }
 
   // getSpend = (userId) => {
@@ -89,11 +98,12 @@ class App extends React.Component{
 
           })
         })
+        .then(this.getEarns(this.state.user.id))
 
         //still have get payers call because a new payer may have been added with earn
         // this.getPayerBals(this.state.user.id)
-        this.getEarns(this.state.user.id)
-        this.getPayerBals(this.state.user.id)
+        // this.getEarns(this.state.user.id)
+        // this.getPayerBals(this.state.user.id)
   }
 
   handleSpend = (amount) => {
@@ -109,7 +119,7 @@ class App extends React.Component{
       })
       .then(resp => resp.json())
       .then(data => {
-        console.log(data)
+        // console.log(data)
         let newUserPtsBalance = data.updated_user_pts
         let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
         let updatedPayerBals = data.payer_bals
@@ -119,11 +129,9 @@ class App extends React.Component{
           user: updatedUser,
           payerBals: updatedPayerBals,
           // latestSpend: spend
-
-
         })
 
-      
+        this.getEarns(this.state.user.id)
       })
 
     

@@ -90,14 +90,14 @@ class UserView extends React.Component{
                           
                             <option  disabled selected>Select Partner</option>
                                 {this.props.payers.map(p => {
-                                    return <option value={`${p.id}`}>{p.name}</option>
+                                    return <option key={`${p.id}`} value={`${p.id}`}>{p.name}</option>
                                     })
                                 }
                             </select>
                             <select onChange={(e) => this.handleEarnAmountChange(e)}>
                             <option  disabled selected>Select Amount</option>
                                 {pointValues.map(pv => {
-                                    return <option value={`${pv}`}>{pv}</option>
+                                    return <option key={`${pv}`} value={`${pv}`}>{pv}</option>
                                     })
                                 }
                             </select>

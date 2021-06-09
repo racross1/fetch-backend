@@ -8,8 +8,10 @@ class UsersController < ApplicationController
     def get_earns 
         user = User.find(params['id'])
         #sorted in descending order so that oldest transactions are at the top in frontend display
-        sortedActiveTransactions = user.get_sorted_active_transactions
-        render json: sortedActiveTransactions.reverse().to_a
+        sorted_active_transactions = user.get_sorted_active_transactions
+        
+        
+        render json: sorted_active_transactions.to_a
     end 
 
     def get_last_spend 

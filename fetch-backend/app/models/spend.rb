@@ -29,6 +29,7 @@ class Spend < ApplicationRecord
     spend_output = []
     amount = amount.abs()
 
+    # byebug
     user = User.find(active_transactions[0].user_id)
     user_pts = user.pts_balance
     payers = user.get_payer_bals
@@ -38,7 +39,7 @@ class Spend < ApplicationRecord
       curr = active_transactions[i]
       curr_amount = curr.active_amount
       curr_payer = Payer.find(curr.payer_id)
-      curr_payer_pts_bal = payers[curr.payer_id]
+      curr_payer_pts_bal = payers[curr.payer_id][0]
       # byebug
       if running_sum  + curr_amount <= amount
         running_sum += curr_amount
@@ -46,8 +47,8 @@ class Spend < ApplicationRecord
         spend_output << {"payer": curr_payer.name, "points": (curr_amount * -1), "timestamp": curr.created_at}
 
         # curr_payer.update(pts_balance: curr_payer_pts_bal - curr_amount)
-        payers[curr.payer_id] = curr_payer_pts_bal - curr_amount
-
+        payers[curr.payer_id][0] = curr_payer_pts_bal - curr_amount
+        # byebug
         curr.update(active_amount: 0)
         i = i + 1
       else
@@ -56,7 +57,8 @@ class Spend < ApplicationRecord
 
         spend_output << {"payer": curr_payer.name, "points": (diff * -1), "timestamp": curr.created_at}
         #may not need to run this update here
-        payers[curr.payer_id] = curr_payer_pts_bal - diff
+        payers[curr.payer_id][0] = curr_payer_pts_bal - diff
+        # payers
         curr.update(active_amount: curr_amount - diff)
 
       end 
@@ -70,6 +72,7 @@ class Spend < ApplicationRecord
       
     end 
 
+    # byebug
     user.update(pts_balance: user_pts - amount)
     #returns spend output and updated payer bals for this user
     return {"spend_output": spend_output, "payer_bals": payers, "updated_user_pts": user.pts_balance}
