@@ -21,10 +21,15 @@ class AdminView extends React.Component{
        return iter
     }
 
+    // spendToIter = () => {
+    //     let latestSpend = this.props.latestSpend
+
+    // }
+
     render(){
-        // console.log(this.props.earns)
        let earns = this.earnsToIter()
        let payerBals = this.payerBalsToIter()
+       let latestSpend = this.props.latestSpend
         return (
             <div id='half-containers'>
                 Admin View
@@ -75,6 +80,24 @@ class AdminView extends React.Component{
                     
                     </div>
                     <div className='column'>Latest Spend Transaction</div>
+                    <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                <th>Payer</th>
+                                <th>Points</th>
+                                <th>Earn Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {!latestSpend ? '':this.props.latestSpend.map(s => {
+                                    return (<tr key={s.timestamp}>
+                                        <td>{s.payer}</td>
+                                        <td>{s.points}</td>
+                                        <td>{moment(s.timestamp).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                                        </tr>)
+                                })}
+                            </tbody>
+                            </Table>
                 </div>
             </div>
         )

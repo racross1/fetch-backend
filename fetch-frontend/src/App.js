@@ -15,17 +15,15 @@ class App extends React.Component{
     spends: [],
     payers: [],
     payerBals: [],
-    latestSpend: {}
+    latestSpend: false
   }
 
   componentDidMount(){
     fetch('http://localhost:3000/payers')
     .then(resp => resp.json())
-    // .then(payers => console.log(payers))
     .then(payers => this.setState({payers: [...payers]}))
   }
   
-  // /users/:id/payerbals
   getPayerBals = (userId) => {
     
     fetch(`http://localhost:3000/users/${userId}/payerbals`)
@@ -34,20 +32,14 @@ class App extends React.Component{
   }
 
   getEarns = (userId) => {
-    
     fetch(`http://localhost:3000/users/${userId}/earns`)
     .then(resp => resp.json())
     .then(earnTransactions =>{
-      // console.log(this.state.payers)
-      // earnTransactions.forEach(e => {
-      //   console.log(this.state.payers.find(p => p.id === e.payer_id))
-
-      // })
-      
+    
       this.setState({earns: earnTransactions})
 
       }
-      // this.setState({earns: [...earnTransactions]}))
+    
     )
   }
 
@@ -87,28 +79,21 @@ class App extends React.Component{
          
           let newUserPtsBalance = data.updated_user_pts
           let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
+          
           let payerId = data.payer.id
           let updatedPayerBals = {...this.state.payerBals}
           updatedPayerBals[payerId]= data.updated_payer_pts
-          let updatedEarns = [...this.state.earns]
           
+          let updatedEarns = [...this.state.earns]
           updatedEarns.push(data.earn_transaction)
           
-         
-        
-
           this.setState({
             user: updatedUser,
             payerBals: updatedPayerBals,
             earns: updatedEarns
           })
         })
-        // .then(this.getEarns(this.state.user.id))
-
-        //still have get payers call because a new payer may have been added with earn
-        // this.getPayerBals(this.state.user.id)
-        // this.getEarns(this.state.user.id)
-        // this.getPayerBals(this.state.user.id)
+      
   }
 
   handleSpend = (amount) => {
@@ -124,16 +109,17 @@ class App extends React.Component{
       })
       .then(resp => resp.json())
       .then(data => {
-        // console.log(data)
+        console.log(data)
         let newUserPtsBalance = data.updated_user_pts
         let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
         let updatedPayerBals = data.payer_bals
-        // let spend = data.spend_output[0]
+        let spend = data.spend_output
+        console.log(spend)
       
         this.setState({
           user: updatedUser,
           payerBals: updatedPayerBals,
-          // latestSpend: spend
+          latestSpend: spend
         })
 
         this.getEarns(this.state.user.id)
@@ -152,7 +138,7 @@ class App extends React.Component{
         <>
         {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn} handleSpend={this.handleSpend}/> 
         }
-        <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals} spend={this.state.spend}/>
+        <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals} latestSpend={this.state.latestSpend}/>
         </>
         )
       }
