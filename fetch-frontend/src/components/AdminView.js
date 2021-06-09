@@ -7,12 +7,10 @@ class AdminView extends React.Component{
         let payerBals = this.props.payerBals
         let iter = Object.entries(payerBals);
        return iter
-    
-
     }
 
     render(){
-        // console.log(this.props.payerBals)
+        // console.log(this.props.spend)
        
         return (
             <div id='half-containers'>
@@ -40,14 +38,14 @@ class AdminView extends React.Component{
                     
                     
                     </div>
-                    <div className='column'>Earn Tranasctions Not Yet Spent
+                    <div className='column'>Earned Points Not Yet Spent
                     <ul>
                       
 
                     </ul>
                     
                     </div>
-                    <div className='column'>Spend Transactions</div>
+                    <div className='column'>Latest Spend Transaction</div>
                 </div>
             </div>
         )

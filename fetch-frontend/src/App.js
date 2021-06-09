@@ -15,7 +15,7 @@ class App extends React.Component{
     spends: [],
     payers: [],
     payerBals: [],
-    latest_spend: []
+    latestSpend: {}
   }
 
   componentDidMount(){
@@ -41,6 +41,15 @@ class App extends React.Component{
       // this.setState({earns: [...earnTransactions]}))
   }
 
+  // getSpend = (userId) => {
+    
+  //   fetch(`http://localhost:3000/users/${userId}/newspend`)
+  //   .then(resp => resp.json())
+  //   .then(spendTransactions => console.log(spendTransactions))
+  //     // this.setState({earns: [...earnTransactions]}))
+  // }
+
+
   handleLogin = (user, bool) => {
     this.setState({
       loggedIn: bool,
@@ -49,6 +58,7 @@ class App extends React.Component{
 
       this.getEarns(user.id)
       this.getPayerBals(user.id)
+    
 
   }
 
@@ -73,6 +83,7 @@ class App extends React.Component{
           
           this.setState({
             user: updatedUser,
+            payerBals: updatedPayerBals
           
 
           })
@@ -101,10 +112,13 @@ class App extends React.Component{
         let newUserPtsBalance = data.updated_user_pts
         let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
         let updatedPayerBals = data.payer_bals
+        // let spend = data.spend_output[0]
       
         this.setState({
           user: updatedUser,
-          payerBals: updatedPayerBals
+          payerBals: updatedPayerBals,
+          // latestSpend: spend
+
 
         })
 
@@ -124,7 +138,7 @@ class App extends React.Component{
         <>
         {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn} handleSpend={this.handleSpend}/> 
         }
-        <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals}/>
+        <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals} spend={this.state.spend}/>
         </>
         )
       }

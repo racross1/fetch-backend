@@ -12,7 +12,9 @@ class UsersController < ApplicationController
         render json: sortedActiveTransactions.reverse().to_a
     end 
 
-    def get_spends 
+    def get_last_spend 
+        # user = User.find(params['id'])
+        # last_spend = User.
         byebug
         
     end 
