@@ -43,6 +43,7 @@ class App extends React.Component{
       //   console.log(this.state.payers.find(p => p.id === e.payer_id))
 
       // })
+      
       this.setState({earns: earnTransactions})
 
       }
@@ -89,16 +90,20 @@ class App extends React.Component{
           let payerId = data.payer.id
           let updatedPayerBals = {...this.state.payerBals}
           updatedPayerBals[payerId]= data.updated_payer_pts
+          let updatedEarns = [...this.state.earns]
+          
+          updatedEarns.push(data.earn_transaction)
+          
+         
         
 
           this.setState({
             user: updatedUser,
-            payerBals: updatedPayerBals
-          
-
+            payerBals: updatedPayerBals,
+            earns: updatedEarns
           })
         })
-        .then(this.getEarns(this.state.user.id))
+        // .then(this.getEarns(this.state.user.id))
 
         //still have get payers call because a new payer may have been added with earn
         // this.getPayerBals(this.state.user.id)

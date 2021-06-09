@@ -9,9 +9,9 @@ class UsersController < ApplicationController
         user = User.find(params['id'])
         #sorted in descending order so that oldest transactions are at the top in frontend display
         sorted_active_transactions = user.get_sorted_active_transactions
+       
         
-        
-        render json: sorted_active_transactions.to_a
+        render json: sorted_active_transactions
     end 
 
     def get_last_spend 
