@@ -1,6 +1,8 @@
 import React from 'react' 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+// import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
  
 const pointValues = [
@@ -18,11 +20,24 @@ const pointValues = [
     10000
 ]
 
+// const useStyles = makeStyles((theme) => ({
+//     container: {
+//       display: 'flex',
+//       flexWrap: 'wrap',
+//     },
+//     textField: {
+//       marginLeft: theme.spacing(1),
+//       marginRight: theme.spacing(1),
+//       width: 200,
+//     },
+//   }));
+
 class UserView extends React.Component{
     state = {
         payerId: '',
         amount: '',
-        spendAmount:''
+        spendAmount:'',
+        earnTimestamp: '2021-06-10T10:30'
     }
     
 
@@ -39,16 +54,21 @@ class UserView extends React.Component{
         })
     }
 
+    handleEarnDateChange = (e) => {
+        this.setState({
+            earnTimestamp: e.target.value
+        })
+    }
+
     handleEarnSubmit = (e) => {
         e.preventDefault()
+       
         if(this.state.payerId === '' || this.state.amount === ''){
             alert('When earning points, no blank fields!')
            
         } else {
-            this.props.handleEarn(this.state.payerId, this.state.amount)
+            this.props.handleEarn(this.state.payerId, this.state.amount, this.state.earnTimestamp)
         }
-
-    //    this.resetDropdown()
 
     }
 
@@ -74,6 +94,7 @@ class UserView extends React.Component{
   
 
     render(){
+        // const classes = useStyles();
         return (
         
             <div id='half-containers'>
@@ -102,8 +123,33 @@ class UserView extends React.Component{
                                 }
                             </select>
                 </Form.Group>
+                <Form.Group>
+                <TextField
+                        onChange={(e) => this.handleEarnDateChange(e)}
+                        id="datetime-local"
+                        label="Choose Timestamp"
+                        type="datetime-local"
+                        defaultValue="2021-06-10T10:30"
+                        
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                    />
+                </Form.Group>
                 <Button type="submit">Earn!</Button><br></br>
                 </Form>
+                {/* <form noValidate>
+                    <TextField
+                        id="datetime-local"
+                        label="Choose Timestamp"
+                        type="datetime-local"
+                        defaultValue="2017-05-24T10:30"
+                        
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                    />
+                </form> */}
                     
                     </div>
                     <div className='column'><strong>Your Current Point Balance:</strong> <br></br>{this.props.user.pts_balance}</div>

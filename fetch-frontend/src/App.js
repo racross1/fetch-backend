@@ -4,6 +4,9 @@ import Login from './components/Login.js'
 import UserView from './components/UserView.js'
 import AdminView from './components/AdminView.js'
 
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
+
 
 
 
@@ -54,8 +57,9 @@ class App extends React.Component{
       this.getPayerBals(user.id)
   }
 
-  handleEarn = (payer, amount) => {
-    let newEarn = {"user_id": parseInt(this.state.user.id), "payer_id": parseInt(payer), "init_amount": parseInt(amount)}
+  handleEarn = (payer, amount, earnTimestamp) => {
+   console.log(earnTimestamp)
+    let newEarn = {"user_id": parseInt(this.state.user.id), "payer_id": parseInt(payer), "init_amount": parseInt(amount), "earn_timestamp": earnTimestamp}
        
         fetch('http://localhost:3000/transactions', {
             method: "POST",
@@ -123,11 +127,11 @@ class App extends React.Component{
       {!this.state.loggedIn ? (
         <Login handleLogin={this.handleLogin}/>
         ) : (
-        <>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
         {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn} handleSpend={this.handleSpend}/> 
         }
         <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals} latestSpend={this.state.latestSpend}/>
-        </>
+        </MuiPickersUtilsProvider>
         )
       }
          
