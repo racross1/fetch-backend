@@ -43,14 +43,6 @@ class App extends React.Component{
     )
   }
 
-  // getSpend = (userId) => {
-    
-  //   fetch(`http://localhost:3000/users/${userId}/newspend`)
-  //   .then(resp => resp.json())
-  //   .then(spendTransactions => console.log(spendTransactions))
-  //     // this.setState({earns: [...earnTransactions]}))
-  // }
-
 
   handleLogin = (user, bool) => {
     this.setState({
@@ -60,8 +52,6 @@ class App extends React.Component{
 
       this.getEarns(user.id)
       this.getPayerBals(user.id)
-    
-
   }
 
   handleEarn = (payer, amount) => {
@@ -109,12 +99,10 @@ class App extends React.Component{
       })
       .then(resp => resp.json())
       .then(data => {
-        console.log(data)
         let newUserPtsBalance = data.updated_user_pts
         let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
         let updatedPayerBals = data.payer_bals
         let spend = data.spend_output
-        console.log(spend)
       
         this.setState({
           user: updatedUser,
