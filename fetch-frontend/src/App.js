@@ -40,7 +40,6 @@ class App extends React.Component{
     )
   }
 
-
   handleLogin = (user, bool) => {
     this.setState({
       loggedIn: bool,
@@ -61,26 +60,7 @@ class App extends React.Component{
             body: JSON.stringify(newEarn),
         })
         .then(resp => resp.json())
-        .then(data => {
-         
-          let newUserPtsBalance = data.updated_user_pts
-          let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
-          
-          let payerId = data.payer.id
-          let updatedPayerBals = {...this.state.payerBals}
-          updatedPayerBals[payerId]= data.updated_payer_pts
-          
-          let updatedEarns = [...this.state.earns]
-          updatedEarns.push(data.earn_transaction)
-          updatedEarns = updatedEarns.sort((a,b) => a.earn_timestamp > b.earn_timestamp ? 1 : -1)
-          
-          this.setState({
-            user: updatedUser,
-            payerBals: updatedPayerBals,
-            earns: updatedEarns
-          })
-        })
-      
+        .then(data => this.handleEarnPayload(data))
   }
 
   handleSpend = (amount) => {
@@ -95,19 +75,41 @@ class App extends React.Component{
       body: JSON.stringify(newSpend),
       })
       .then(resp => resp.json())
-      .then(data => {
-        let newUserPtsBalance = data.updated_user_pts
-        let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
-        let updatedPayerBals = data.payer_bals
-        let spend = data.spend_output
-      
-        this.setState({
-          user: updatedUser,
-          payerBals: updatedPayerBals,
-          latestSpend: spend
-        })
-        this.getEarns(this.state.user.id)
-      })
+      .then(data => data.error? alert("Insufficient funds - add more points!") : this.handleSpendPayload(data))
+  }
+
+  handleEarnPayload = (data) => {
+    let newUserPtsBalance = data.updated_user_pts
+    let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
+    let payerId = data.payer.id
+    let updatedPayerBals = {...this.state.payerBals}
+    updatedPayerBals[payerId]= data.updated_payer_pts
+    
+    let updatedEarns = [...this.state.earns]
+    updatedEarns.push(data.earn_transaction)
+    updatedEarns = updatedEarns.sort((a,b) => a.earn_timestamp > b.earn_timestamp ? 1 : -1)
+    
+    this.setState({
+      user: updatedUser,
+      payerBals: updatedPayerBals,
+      earns: updatedEarns
+    })
+
+  }
+
+  handleSpendPayload = (data) => {
+    let newUserPtsBalance = data.updated_user_pts
+    let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
+    let updatedPayerBals = data.payer_bals
+    let spend = data.spend_output
+  
+    this.setState({
+      user: updatedUser,
+      payerBals: updatedPayerBals,
+      latestSpend: spend
+    })
+    this.getEarns(this.state.user.id)
+
   }
 
   render() {

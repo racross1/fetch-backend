@@ -8,7 +8,6 @@ class Login extends React.Component{
     }
 
     handleChangeUsername = (e) => {
-        
         this.setState({
             username: e.target.value
         })
@@ -18,16 +17,20 @@ class Login extends React.Component{
         e.preventDefault() 
        
         let newUsername = this.state.username
-       
-        fetch('http://localhost:3000/users', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            }, 
-            body: JSON.stringify({'username': newUsername}),
-        })
-        .then(resp => resp.json())
-        .then(registeredUser => this.props.handleLogin(registeredUser, true))
+        if (newUsername === ''){
+            alert('Please enter a username')
+            return
+        } else {
+            fetch('http://localhost:3000/users', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }, 
+                body: JSON.stringify({'username': newUsername}),
+            })
+            .then(resp => resp.json())
+            .then(registeredUser => this.props.handleLogin(registeredUser, true))
+            }
     }
 
     render(){

@@ -32,17 +32,6 @@ class User < ApplicationRecord
         return payerBals
     end 
 
-    # def get_named_payer_bals
-    #     payerBals = self.get_payer_bals
-    #     namedPayerBals = {}
-
-    #     payerBals.each do |k,v|
-    #         namedPayerBals[Payer.find(k).name] = v
-    #     end 
-
-    #     return namedPayerBals
-    # end 
-
     def update_payer_bal(payer_id, transactionAmount)
         payers = self.get_payer_bals
         if !payers.has_key?(payer_id)

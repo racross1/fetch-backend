@@ -13,7 +13,6 @@ class AdminView extends React.Component{
 
     earnsToIter = () => {
         let earns = this.props.earns
-        console.log(earns)
         let iter = earns.map(e => {
             let name = this.props.payers.find(p => p.id === e.payer_id).name
             return [name, e.init_amount, e.active_amount, moment(e.earn_timestamp).format('MMMM Do YYYY, h:mm a')]
@@ -22,12 +21,11 @@ class AdminView extends React.Component{
     }
 
     render(){
-    //    let earns = this.earnsToIter()
        let payerBals = this.payerBalsToIter()
        let latestSpend = this.props.latestSpend
         return (
             <div id='half-containers'>
-                Admin View
+                Admin Console
                 <br></br> <br></br>
                 <div className='row'>
                     <div className='column'>

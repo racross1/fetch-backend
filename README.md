@@ -8,10 +8,12 @@ This project also includes a frontend interface to show a summary output of a us
 
 To use this project you will need the latest version of Ruby and Rails as well as PostrGreSQL and a Javascript package manager (these instructions assume npm as the user's package manager).
 
+
 # Built With
 - Ruby on Rails
 - PostGreSQL
 - React JS
+
 
 # Installation
 To install fork, clone, and navigate into this repository. 
@@ -33,6 +35,7 @@ Navigate into the fetch-frontend folder and then enter the following command in 
 
     npm install
 
+
 # Starting the App
 
 ## Starting Backend
@@ -45,6 +48,7 @@ If you prefer to run the app in the command line instead of using the front and 
 ## Starting Frontend
 To start the frontend make sure you are in the fetch-frontend folder in your terminal and enter the following command in your terminal: 
     npm start
+    
 
 # How to Use
 
@@ -94,29 +98,3 @@ On the righthand side of the admin console you can see the spend output for any 
 This output is not persisted to the backend, and so is only shown when a new spend transaction is run. 
 
 The spend output will show the timestamps, payers and amounts comprising each spend transaction.  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-sign in, see their past games, and start new games! GeograBee is a fun and free way to study and learn about the geography of the US! Choose a username and difficulty then compete against your friends for who has the best knowledge of US states! Have fun!
-
-👉 User Stories A user you can create a username A user you can select a difficulty A user you can play a game A user you click on states and fill out the names of as many states as possible in the alloted time A a user can see past scores and associated game difficulty
-
-🚀 Install Instructions Fork, clone, and navigate into this repository Open up your terminal, start a new tab, and navigate to geoBee-backend - run bundle install Run rails db:migrate Run rails server Navigate out of the geoBee-backend folder and into the geoBee-frontend folder Run open index.html in the terminal Have fun!

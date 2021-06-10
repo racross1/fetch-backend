@@ -77,7 +77,7 @@ class UserView extends React.Component{
     render(){
         return (
             <div id='half-containers'>
-            User View
+            User Console
             <br></br> <br></br>
             Welcome {this.props.user.username}!
             <br></br> <br></br>
