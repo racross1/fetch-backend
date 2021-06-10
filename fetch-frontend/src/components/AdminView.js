@@ -13,21 +13,16 @@ class AdminView extends React.Component{
 
     earnsToIter = () => {
         let earns = this.props.earns
+        console.log(earns)
         let iter = earns.map(e => {
             let name = this.props.payers.find(p => p.id === e.payer_id).name
             return [name, e.init_amount, e.active_amount, moment(e.earn_timestamp).format('MMMM Do YYYY, h:mm a')]
-
         })
        return iter
     }
 
-    // spendToIter = () => {
-    //     let latestSpend = this.props.latestSpend
-
-    // }
-
     render(){
-       let earns = this.earnsToIter()
+    //    let earns = this.earnsToIter()
        let payerBals = this.payerBalsToIter()
        let latestSpend = this.props.latestSpend
         return (
@@ -52,12 +47,13 @@ class AdminView extends React.Component{
                                         </tr>)
                                 })}
                             </tbody>
-                            </Table>
+                        </Table>
                     
                     
                     </div>
-                    <div className='column'>Earned Points Not Yet Spent
-                    <Table striped bordered hover>
+                    <div className='column'>
+                        Earned Points Not Yet Spent
+                        <Table striped bordered hover>
                             <thead>
                                 <tr>
                                 <th>Payer</th>
@@ -67,7 +63,7 @@ class AdminView extends React.Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                {earns.map(p => {
+                                {this.props.earns === []? null : this.earnsToIter().map(p => {
                                     return (<tr key={p[3]}>
                                         <td>{p[0]}</td>
                                         <td>{p[1]}</td>
@@ -76,10 +72,10 @@ class AdminView extends React.Component{
                                         </tr>)
                                 })}
                             </tbody>
-                            </Table>
-                    
+                        </Table>
                     </div>
-                    <div className='column'>Latest Spend Transaction</div>
+                    <div className='column'>
+                        Latest Spend Transaction</div>
                     <Table striped bordered hover>
                             <thead>
                                 <tr>
@@ -89,11 +85,11 @@ class AdminView extends React.Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                {!latestSpend ? '':this.props.latestSpend.map(s => {
+                                {!latestSpend ? null : this.props.latestSpend.map(s => {
                                     return (<tr key={s.timestamp}>
                                         <td>{s.payer}</td>
                                         <td>{s.points}</td>
-                                        <td>{moment(s.timestamp).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                                        <td>{moment(s.timestamp).format('MMMM Do YYYY, h:mm a')}</td>
                                         </tr>)
                                 })}
                             </tbody>

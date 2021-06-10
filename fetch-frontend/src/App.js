@@ -8,8 +8,6 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
 
-
-
 class App extends React.Component{
   state = {
     loggedIn: false,
@@ -28,7 +26,6 @@ class App extends React.Component{
   }
   
   getPayerBals = (userId) => {
-    
     fetch(`http://localhost:3000/users/${userId}/payerbals`)
     .then(resp => resp.json())
     .then(payerBals => this.setState({payerBals: payerBals}))
@@ -38,11 +35,8 @@ class App extends React.Component{
     fetch(`http://localhost:3000/users/${userId}/earns`)
     .then(resp => resp.json())
     .then(earnTransactions =>{
-    
       this.setState({earns: earnTransactions})
-
       }
-    
     )
   }
 
@@ -52,16 +46,11 @@ class App extends React.Component{
       loggedIn: bool,
       user: user
       })
-
       this.getEarns(user.id)
       this.getPayerBals(user.id)
   }
 
   handleEarn = (payer, amount, earnTimestamp) => {
-  //  console.log(earnTimestamp)
-  //  console.log(moment(earnTimestamp.format()))
-  //  let newDate = earnTimestamp.format()
-  //  console.log(newDate)
     let newEarn = {"user_id": parseInt(this.state.user.id), "payer_id": parseInt(payer), "init_amount": parseInt(amount), "earn_timestamp": earnTimestamp}
        
         fetch('http://localhost:3000/transactions', {
@@ -117,33 +106,26 @@ class App extends React.Component{
           payerBals: updatedPayerBals,
           latestSpend: spend
         })
-
         this.getEarns(this.state.user.id)
       })
-
-    
   }
 
-  
   render() {
-  return (
-    <div id='main-container' className="App">
-      {!this.state.loggedIn ? (
-        <Login handleLogin={this.handleLogin}/>
-        ) : (
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-        {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn} handleSpend={this.handleSpend}/> 
-        }
-        <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals} latestSpend={this.state.latestSpend}/>
-        </MuiPickersUtilsProvider>
-        )
-      }
-         
-
-        
-    </div>
-  );
-      }
+    return (
+      <div id='main-container' className="App">
+        {!this.state.loggedIn ? (
+          <Login handleLogin={this.handleLogin}/>
+          ) : (
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn} handleSpend={this.handleSpend}/> 
+            }
+            <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals} latestSpend={this.state.latestSpend}/>
+          </MuiPickersUtilsProvider>
+          )
+        }   
+      </div>
+    );
+  }
 }
 
 export default App;

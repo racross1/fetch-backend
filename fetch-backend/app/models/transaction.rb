@@ -9,6 +9,9 @@ class Transaction < ApplicationRecord
     amount = self.init_amount
 
     user_bal = user.pts_balance
+    if user_bal === nil
+      user_bal = 0
+    end 
 
     self.save
 

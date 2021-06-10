@@ -7,6 +7,7 @@ class TransactionsController < ApplicationController
         
         transaction = Transaction.new(user_id: transaction_params["user_id"], payer_id: transaction_params["payer_id"], init_amount: amount, active_amount: amount, earn_timestamp: earn_timestamp)
         earn_output = transaction.process_new_transaction
+        
         render json: earn_output
     end 
 

@@ -12,7 +12,6 @@ class SpendsController < ApplicationController
         else  
             render json: result
         end 
-
     end
 
     private

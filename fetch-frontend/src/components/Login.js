@@ -33,15 +33,14 @@ class Login extends React.Component{
     render(){
         return (
             <div id='login'>
-                enter username
                 <Form id='signup-form' onSubmit={(e) => this.handleSubmit(e)}>
-                <h5>Please Sign In</h5>
+                <h5>Enter Username</h5>
                 
                 <Form.Group controlId="signup-form-username">
                     <Form.Label>Username</Form.Label>
                     <Form.Control size='sm' onChange={(e) => this.handleChangeUsername(e)} type="text" className="form-control" placeholder="Enter Username" />
                 </Form.Group>
-                <Button type="submit">Sign Up</Button><br></br>
+                <Button type="submit">Sign In</Button><br></br>
                 </Form>
                
             </div>

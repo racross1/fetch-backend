@@ -2,7 +2,7 @@ class User < ApplicationRecord
     has_many :transactions
     has_many :spends
     has_many :payers, through: :transactions
-    validates :pts_balance, :numericality => { :greater_than_or_equal_to => 0 }
+   
 
     def get_active_transactions
         return self.transactions.select{|t| t.active_amount != 0}
@@ -32,16 +32,16 @@ class User < ApplicationRecord
         return payerBals
     end 
 
-    def get_named_payer_bals
-        payerBals = self.get_payer_bals
-        namedPayerBals = {}
+    # def get_named_payer_bals
+    #     payerBals = self.get_payer_bals
+    #     namedPayerBals = {}
 
-        payerBals.each do |k,v|
-            namedPayerBals[Payer.find(k).name] = v
-        end 
+    #     payerBals.each do |k,v|
+    #         namedPayerBals[Payer.find(k).name] = v
+    #     end 
 
-        return namedPayerBals
-    end 
+    #     return namedPayerBals
+    # end 
 
     def update_payer_bal(payer_id, transactionAmount)
         payers = self.get_payer_bals
