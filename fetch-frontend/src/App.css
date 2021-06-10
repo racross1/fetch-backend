@@ -11,13 +11,17 @@ body {
 div {
   box-sizing: border-box;
   /* border: 0.5px solid black; */
- 
 
+}
+
+.section-header{
+  font-weight: bold;
 }
 
 .main-container {
   height: 100%;
   display: flex;
+  justify-content: center;
   
 }
 
@@ -34,9 +38,9 @@ div {
 .half-containers {
   flex: 1;
   overflow: auto;
-  padding: 5px;
+  margin: 20px;
   box-sizing: border-box;
-  border: 0.5px solid black !important;
+  justify-content: center;
 
   
 }
@@ -47,11 +51,36 @@ div {
  
 } */
 
+.column-1 {
+  float: left;
+  width: 25%;
+  border:none !important;
+  justify-content: center;
+}
 
-.column {
+.column-2 {
+  float: left;
+  width: 45%;
+  border:none !important;
+  justify-content: center;
+  border-left: 0.5px;
+  border-right: 0.5px;
+  border: 0.5px solid black;
+}
+
+.column-3 {
+  float: left;
+  width: 30%;
+  border:none !important;
+  justify-content: center;
+}
+
+
+.column-4 {
   float: left;
   width: 33.33%;
   border:none !important;
+  justify-content: center;
 }
 
 /* Clear floats after the columns */

@@ -82,7 +82,7 @@ class UserView extends React.Component{
             Welcome {this.props.user.username}!
             <br></br> <br></br>
             <div className='row'>
-                    <div className='column'>Earn Points
+                    <div className='column-4'><span className='section-header'>Earn Points</span>
                         <Form id='earn-points' onSubmit={(e) => this.handleEarnSubmit(e)}>
                             <Form.Group controlId="handle-payer">
                                 <select onChange={(e) => this.handlePayerChange(e)}>
@@ -116,8 +116,8 @@ class UserView extends React.Component{
                             <Button type="submit">Earn!</Button><br></br>
                         </Form>
                     </div>
-                    <div className='column'><strong>Your Current Point Balance:</strong><br></br>{this.props.user.pts_balance}</div>
-                    <div className='column'>Spend Points
+                    <div className='column-4'><span className='section-header'>Your Current Point Balance:</span><br></br>{this.props.user.pts_balance}</div>
+                    <div className='column-4'><span className='section-header'>Spend Points</span>
                         <Form id='spend-points' onSubmit={(e) => this.handleSpendSubmit(e)}>
                             <Form.Group controlId="earn-points">
                                 <select onChange={(e) => this.handleSpendAmountChange(e)}>

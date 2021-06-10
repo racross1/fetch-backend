@@ -25,11 +25,13 @@ class AdminView extends React.Component{
        let latestSpend = this.props.latestSpend
         return (
             <div id='half-containers'>
+                <br></br><br></br><br></br>
                 Admin Console
                 <br></br> <br></br>
                 <div className='row'>
-                    <div className='column'>
-                        Payer Balances
+                    <div className='column-1'>
+                    <span className='section-header'>Payer Balances</span>
+                    <br></br><br></br>
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
@@ -49,8 +51,9 @@ class AdminView extends React.Component{
                     
                     
                     </div>
-                    <div className='column'>
-                        Earned Points Not Yet Spent
+                    <div className='column-2'>
+                    <span className='section-header'>Earned Points Not Yet Spent</span>
+                        <br></br><br></br>
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
@@ -72,8 +75,9 @@ class AdminView extends React.Component{
                             </tbody>
                         </Table>
                     </div>
-                    <div className='column'>
-                        Latest Spend Transaction</div>
+                    <div className='column-3'>
+                    <span className='section-header'>Latest Spend Transaction</span>
+                    <br></br><br></br>
                     <Table striped bordered hover>
                             <thead>
                                 <tr>
@@ -92,6 +96,7 @@ class AdminView extends React.Component{
                                 })}
                             </tbody>
                             </Table>
+                    </div>
                 </div>
             </div>
         )
