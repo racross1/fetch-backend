@@ -83,6 +83,7 @@ class App extends React.Component{
           
           let updatedEarns = [...this.state.earns]
           updatedEarns.push(data.earn_transaction)
+          updatedEarns = updatedEarns.sort((a,b) => a.earn_timestamp > b.earn_timestamp ? 1 : -1)
           
           this.setState({
             user: updatedUser,

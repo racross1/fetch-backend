@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
     def get_sorted_active_transactions
         transactions = self.get_active_transactions
-        sorted = transactions.sort_by{|t| t.created_at}
+        sorted = transactions.sort_by{|t| t.earn_timestamp}
         return sorted
     end 
     
