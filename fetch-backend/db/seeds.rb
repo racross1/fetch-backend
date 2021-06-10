@@ -3,12 +3,12 @@ Spend.delete_all
 User.delete_all
 Payer.delete_all
 
-# u1 = User.create(username: 'test_user', pts_balance: 0)
+u1 = User.create(username: 'test_user', pts_balance: 0)
 
-# p1 = Payer.create(name: "DANNON")
-# p2 = Payer.create(name: "MILLER COORS")
-# p3 = Payer.create(name: "GAP")
-# p4 = Payer.create(name: "UNILEVER")
+p1 = Payer.create(name: "DANNON")
+p2 = Payer.create(name: "MILLER COORS")
+p3 = Payer.create(name: "GAP")
+p4 = Payer.create(name: "UNILEVER")
 
 # t1 = Transaction.create(user_id: u1.id, payer_id: p1.id, init_amount: 100, active_amount: 100)
 # t1.process_new_transaction

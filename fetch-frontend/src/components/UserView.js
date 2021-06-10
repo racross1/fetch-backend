@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 // import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import moment from 'moment'
 
  
 const pointValues = [
@@ -55,13 +56,17 @@ class UserView extends React.Component{
     }
 
     handleEarnDateChange = (e) => {
+        // time = e.target.value
+       
+        let formattedTime = moment(e.target.value).format()
         this.setState({
-            earnTimestamp: e.target.value
+            earnTimestamp: formattedTime
         })
     }
 
     handleEarnSubmit = (e) => {
         e.preventDefault()
+        // console.log(moment(this.state.earnTimestamp).format())
        
         if(this.state.payerId === '' || this.state.amount === ''){
             alert('When earning points, no blank fields!')

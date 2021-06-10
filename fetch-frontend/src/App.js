@@ -58,7 +58,10 @@ class App extends React.Component{
   }
 
   handleEarn = (payer, amount, earnTimestamp) => {
-   console.log(earnTimestamp)
+  //  console.log(earnTimestamp)
+  //  console.log(moment(earnTimestamp.format()))
+  //  let newDate = earnTimestamp.format()
+  //  console.log(newDate)
     let newEarn = {"user_id": parseInt(this.state.user.id), "payer_id": parseInt(payer), "init_amount": parseInt(amount), "earn_timestamp": earnTimestamp}
        
         fetch('http://localhost:3000/transactions', {
