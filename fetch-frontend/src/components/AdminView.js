@@ -21,9 +21,11 @@ class AdminView extends React.Component{
        return iter
     }
 
+
     render(){
        let payerBals = this.payerBalsToIter()
        let latestSpend = this.props.latestSpend
+       let globalPayerBals = this.props.globalPayerBals
         return (
             <div id='half-containers'>
                 <br></br><br></br><br></br>
@@ -31,7 +33,7 @@ class AdminView extends React.Component{
                 <br></br> <br></br>
                 <div className='row'>
                     <div className='column-1'>
-                    <span className='section-header'>Payer Balances</span>
+                    <span className='section-header'>Payer Balances for User</span>
                     <br></br><br></br>
                         <Table striped bordered hover size="sm">
                             <thead>
@@ -45,6 +47,25 @@ class AdminView extends React.Component{
                                     return (<tr key={p[0]}>
                                         <td>{p[1][1]}</td>
                                         <td>{p[1][0]}</td>
+                                        </tr>)
+                                })}
+                            </tbody>
+                        </Table>
+                    <br></br><br></br>
+                        <span className='section-header'>Global Payer Balances</span>
+                    <br></br><br></br>
+                        <Table striped bordered hover size="sm">
+                            <thead>
+                                <tr>
+                                <th>Payer</th>
+                                <th>Point Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {globalPayerBals.map(p => {
+                                    return (<tr key={p.id}>
+                                        <td>{p.name}</td>
+                                        <td>{p.pts_balance}</td>
                                         </tr>)
                                 })}
                             </tbody>

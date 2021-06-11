@@ -16,15 +16,26 @@ class App extends React.Component{
     spends: [],
     payers: [],
     payerBals: [],
-    latestSpend: false
+    latestSpend: false,
+    globalPayerBals: []
   }
 
   componentDidMount(){
     fetch('http://localhost:3000/payers')
     .then(resp => resp.json())
     .then(payers => {
-      console.log(payers)
-      this.setState({payers: [...payers]})
+      this.setState({
+        payers: [...payers],
+        globalPayerBals: [...payers] 
+      })
+    })
+  }
+
+  getGlobalPayerBals(){
+    fetch('http://localhost:3000/payers')
+    .then(resp => resp.json())
+    .then(payers => {
+      this.setState({globalPayerBals: [...payers]})
     })
   }
   
@@ -63,7 +74,10 @@ class App extends React.Component{
             body: JSON.stringify(newEarn),
         })
         .then(resp => resp.json())
-        .then(data => this.handleEarnPayload(data))
+        .then(data => {
+          this.getGlobalPayerBals()
+          this.handleEarnPayload(data)
+        })
   }
 
   handleSpend = (amount) => {
@@ -101,6 +115,7 @@ class App extends React.Component{
   }
 
   handleSpendPayload = (data) => {
+    this.getGlobalPayerBals()
     let newUserPtsBalance = data.updated_user_pts
     let updatedUser = {...this.state.user, pts_balance: newUserPtsBalance}
     let updatedPayerBals = data.payer_bals
@@ -124,7 +139,7 @@ class App extends React.Component{
           <MuiPickersUtilsProvider utils={MomentUtils}>
             {<UserView user={this.state.user} payers={this.state.payers} handleEarn={this.handleEarn} handleSpend={this.handleSpend}/> 
             }
-            <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals} latestSpend={this.state.latestSpend}/>
+            <AdminView payers={this.state.payers} earns={this.state.earns} payerBals={this.state.payerBals} latestSpend={this.state.latestSpend} globalPayerBals={this.state.globalPayerBals}/>
           </MuiPickersUtilsProvider>
           )
         }   
