@@ -34,6 +34,7 @@ class User < ApplicationRecord
 
     def update_payer_bal(payer_id, transactionAmount)
         payers = self.get_payer_bals
+    
         if !payers.has_key?(payer_id)
             payers[payer_id] = 0
             payers[payer_id] += transactionAmount
