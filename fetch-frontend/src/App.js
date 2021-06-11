@@ -22,7 +22,10 @@ class App extends React.Component{
   componentDidMount(){
     fetch('http://localhost:3000/payers')
     .then(resp => resp.json())
-    .then(payers => this.setState({payers: [...payers]}))
+    .then(payers => {
+      console.log(payers)
+      this.setState({payers: [...payers]})
+    })
   }
   
   getPayerBals = (userId) => {
