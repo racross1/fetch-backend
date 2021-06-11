@@ -43,12 +43,10 @@ To start the backend server make sure you are in the fetch-backend folder in you
 
     rails s
 
-If you prefer to run the app in the command line instead of using the front and backend interface, you can add new entries in the fetch-backend/run.rb file and see the outputs by running ruby run.rb in your terminal.
-
 ## Starting Frontend
 To start the frontend make sure you are in the fetch-frontend folder in your terminal and enter the following command in your terminal: 
     npm start
-    
+
 
 # How to Use
 
