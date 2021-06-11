@@ -40,6 +40,7 @@ class Spend < ApplicationRecord
       curr_amount = curr.active_amount
       curr_payer = Payer.find(curr.payer_id)
       #curr_payer_global_pts = curr_payer.pts_balance
+      curr_payer_global_pts = curr_payer.pts_balance
       curr_payer_pts_bal = payers[curr.payer_id][0]
      
       if running_sum  + curr_amount <= amount
@@ -48,6 +49,7 @@ class Spend < ApplicationRecord
         payers[curr.payer_id][0] = curr_payer_pts_bal - curr_amount
         curr.update(active_amount: 0)
         #curr_payer.update(pts_balance: curr_payer_global_pts - curr_amount )
+        curr_payer.update(pts_balance: curr_payer_global_pts - curr_amount)
         i = i + 1
 
       else
@@ -58,6 +60,7 @@ class Spend < ApplicationRecord
 
         payers[curr.payer_id][0] = curr_payer_pts_bal - diff
         #curr_payer.update(pts_balance: curr_payer_global_pts - diff)
+        curr_payer.update(pts_balance: curr_payer_global_pts - diff)
         curr.update(active_amount: curr_amount - diff)
 
       end 
