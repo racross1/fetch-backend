@@ -32,13 +32,8 @@ class User < ApplicationRecord
         return payerBals
     end 
 
-    def update_payer_bal(payer_id, transactionAmount)
+    def update_payer_bal(payer_id)
         payers = self.get_payer_bals
-    
-        if !payers.has_key?(payer_id)
-            payers[payer_id] = 0
-            payers[payer_id] += transactionAmount
-        end 
         
         return payers[payer_id]
 

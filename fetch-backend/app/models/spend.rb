@@ -39,7 +39,6 @@ class Spend < ApplicationRecord
       curr = active_transactions[i]
       curr_amount = curr.active_amount
       curr_payer = Payer.find(curr.payer_id)
-      #curr_payer_global_pts = curr_payer.pts_balance
       curr_payer_global_pts = curr_payer.pts_balance
       curr_payer_pts_bal = payers[curr.payer_id][0]
      
@@ -48,7 +47,6 @@ class Spend < ApplicationRecord
         spend_output << {"payer": curr_payer.name, "points": (curr_amount * -1), "timestamp": curr.earn_timestamp}
         payers[curr.payer_id][0] = curr_payer_pts_bal - curr_amount
         curr.update(active_amount: 0)
-        #curr_payer.update(pts_balance: curr_payer_global_pts - curr_amount )
         curr_payer.update(pts_balance: curr_payer_global_pts - curr_amount)
         i = i + 1
 
@@ -59,7 +57,6 @@ class Spend < ApplicationRecord
         spend_output << {"payer": curr_payer.name, "points": (diff * -1), "timestamp": curr.earn_timestamp}
 
         payers[curr.payer_id][0] = curr_payer_pts_bal - diff
-        #curr_payer.update(pts_balance: curr_payer_global_pts - diff)
         curr_payer.update(pts_balance: curr_payer_global_pts - diff)
         curr.update(active_amount: curr_amount - diff)
 

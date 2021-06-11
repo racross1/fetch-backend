@@ -13,10 +13,6 @@ class Transaction < ApplicationRecord
       user_bal = 0
     end 
 
-    #payer_bal = payer.pts_balance
-    # if payer_bal === nil
-    #   payer_bal = 0
-    # end 
     payer_bal = payer.pts_balance
     if payer_bal === nil
       payer_bal = 0
@@ -25,9 +21,9 @@ class Transaction < ApplicationRecord
     self.save
 
     user.update(pts_balance: user_bal + amount)
-    #payer.update(pts_balance: payer_bal + amount)
     payer.update(pts_balance: payer_bal + amount)
-    payer_bal_for_user = user.update_payer_bal(payer.id, amount)
+    
+    payer_bal_for_user = user.update_payer_bal(payer.id)
 
     return {"updated_user_pts": user.pts_balance, "payer": payer, "updated_payer_pts": payer_bal_for_user, "earn_transaction": self}
 
