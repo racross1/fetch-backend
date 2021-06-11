@@ -51,7 +51,7 @@ class UserView extends React.Component{
         e.preventDefault()
         let formattedTime = moment(this.state.earnTimestamp).format()
         if(this.state.payerId === '' || this.state.amount === '' ){
-            alert('When earning points, no blank fields! Must choose date and time as well')
+            alert('When earning points, no blank fields!')
         } else {
             this.props.handleEarn(this.state.payerId, this.state.amount, formattedTime)
         }
