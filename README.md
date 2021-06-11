@@ -69,7 +69,7 @@ The example data with which the database is seeded includes an example user with
 
 The example data also includes transactions for a user with the username "joe" (included in order to show differences in payer points by user and global payer points across users). You can log in as joe as well.
 
-To access the app with the seeded test user data, enter either "test_user" (or "joe") into the username field and then click the login button. 
+To access the app with the seeded test user data, enter "test_user" (or "joe") into the username field and then click the login button. 
 
 You can also create a new username if you prefer. To log back in as a user you create, you will need to enter the username exactly as you first entered it (field is case sensitive).
 
