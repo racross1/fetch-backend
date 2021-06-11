@@ -62,6 +62,8 @@ To access the app with the seeded test user data, enter either "test_user" (or "
 
 You can also create a new username if you prefer. To log back in as a user you create, you will need to enter the username exactly as you first entered it (field is case sensitive).
 
+If at any point you would like to log in as a different user, refresh your browser and you will be taken back to the login page.
+
 
 ## Using the App
 

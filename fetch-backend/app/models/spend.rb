@@ -44,7 +44,7 @@ class Spend < ApplicationRecord
      
       if running_sum  + curr_amount <= amount
         running_sum += curr_amount
-        spend_output << {"payer": curr_payer.name, "points": (curr_amount * -1), "timestamp": curr.earn_timestamp}
+        spend_output << {'payer': curr_payer.name, 'points': (curr_amount * -1), 'timestamp': curr.earn_timestamp}
         payers[curr.payer_id][0] = curr_payer_pts_bal - curr_amount
         curr.update(active_amount: 0)
         curr_payer.update(pts_balance: curr_payer_global_pts - curr_amount)
@@ -54,7 +54,7 @@ class Spend < ApplicationRecord
         diff = amount - running_sum
         running_sum += diff
 
-        spend_output << {"payer": curr_payer.name, "points": (diff * -1), "timestamp": curr.earn_timestamp}
+        spend_output << {'payer': curr_payer.name, 'points': (diff * -1), 'timestamp': curr.earn_timestamp}
 
         payers[curr.payer_id][0] = curr_payer_pts_bal - diff
         curr_payer.update(pts_balance: curr_payer_global_pts - diff)
@@ -65,7 +65,7 @@ class Spend < ApplicationRecord
     end 
     user.update(pts_balance: user_pts - amount)
    
-    return {"spend_output": spend_output, "payer_bals": payers, "updated_user_pts": user.pts_balance}
+    return {'spend_output': spend_output, 'payer_bals': payers, 'updated_user_pts': user.pts_balance}
 
   end
 

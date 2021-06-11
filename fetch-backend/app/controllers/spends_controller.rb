@@ -2,7 +2,7 @@ class SpendsController < ApplicationController
     
     def create
         amount = spend_params[:amount]
-        user = User.find(spend_params[:user_id])
+        user = User.find(spend_params['user_id'])
         user_bal = user.pts_balance
 
         if amount > user_bal
