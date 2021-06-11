@@ -10,30 +10,28 @@ body {
 
 div {
   box-sizing: border-box;
-  /* border: 0.5px solid black; */
-
 }
 
 .section-header{
   font-weight: bold;
+  color: #300F3C;
+}
+
+.container-half-header{
+  font-weight: bold;
+  color: #06813B;
+}
+
+.page-greeting{
+  font-weight: bold;
+  color: #E71C78
 }
 
 .main-container {
   height: 100%;
   display: flex;
   justify-content: center;
-  
 }
-
-/* .left-container {
-  flex: 1 1 0;
-}
-
-.right-container {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-} */
 
 .half-containers {
   flex: 1;
@@ -41,77 +39,46 @@ div {
   margin: 20px;
   box-sizing: border-box;
   justify-content: center;
-
-  
 }
-
-/* .mid-container {
-  flex: 1 1 0;
-  float:left;
- 
-} */
 
 .column-1 {
   float: left;
-  width: 25%;
-  border:none !important;
-  justify-content: center;
+  width: 26%;
+ 
+  justify-content: right;
 }
 
 .column-2 {
   float: left;
-  width: 45%;
-  border:none !important;
+  width: 49%;
   justify-content: center;
-  border-left: 0.5px;
-  border-right: 0.5px;
-  border: 0.5px solid black;
 }
 
 .column-3 {
   float: left;
-  width: 30%;
-  border:none !important;
+  width: 25%;
   justify-content: center;
 }
-
 
 .column-4 {
   float: left;
   width: 33.33%;
-  border:none !important;
   justify-content: center;
 }
 
-/* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
-  border:none !important;
 }
 
-
-
-/* html, body {
-  height:100%;
-  padding:10px;
-  margin:0;
+th {
+  padding: 5px;
+  border: 2px solid black;
 }
-.container {
-  display: grid
 
+td {
+  padding: 5px;
+  border: 1px solid black;
 }
-.top {
-  min-height:50%;
-  max-height: 50%;
-  margin-bottom: 5px;
-  border: solid black
- 
-}
-.bottom {
-  min-height:50%;
 
-  margin-top: 5px;
-  border-style: solid black
-} */

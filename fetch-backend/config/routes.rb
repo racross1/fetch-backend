@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  resources :spends
-  resources :transactions
-  resources :payers
-  resources :users
+  resources :spends, only: :create
+  resources :transactions, only: :create
+  resources :payers, only: :index
+  resources :users, only: :create
 
   get '/users/:id/earns', to: 'users#get_earns', as: 'earns'
   get '/users/:id/newspend', to: 'users#get_latest_spend', as: 'newspend'
   get '/users/:id/payerbals', to: 'users#get_payer_bals', as: 'payerbals'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

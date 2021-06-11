@@ -1,6 +1,7 @@
 import React from 'react' 
-import Table from 'react-bootstrap/Table' 
+import Table from 'react-bootstrap/Table'
 import moment from 'moment'
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class AdminView extends React.Component{
@@ -26,13 +27,13 @@ class AdminView extends React.Component{
         return (
             <div id='half-containers'>
                 <br></br><br></br><br></br>
-                Admin Console
+                <span className='container-half-header'>Admin Console</span>
                 <br></br> <br></br>
                 <div className='row'>
                     <div className='column-1'>
                     <span className='section-header'>Payer Balances</span>
                     <br></br><br></br>
-                        <Table striped bordered hover>
+                        <Table striped bordered hover size="sm">
                             <thead>
                                 <tr>
                                 <th>Payer</th>
@@ -54,7 +55,7 @@ class AdminView extends React.Component{
                     <div className='column-2'>
                     <span className='section-header'>Earned Points Not Yet Spent</span>
                         <br></br><br></br>
-                        <Table striped bordered hover>
+                        <Table bordered={ true } size="sm">
                             <thead>
                                 <tr>
                                 <th>Payer</th>

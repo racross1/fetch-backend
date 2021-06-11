@@ -77,9 +77,9 @@ class UserView extends React.Component{
     render(){
         return (
             <div id='half-containers'>
-            User Console
+             <span className='container-half-header'>User Console</span>
             <br></br> <br></br>
-            Welcome {this.props.user.username}!
+            <span className='page-greeting'>Welcome {this.props.user.username}!</span>
             <br></br> <br></br>
             <div className='row'>
                     <div className='column-4'><span className='section-header'>Earn Points</span>
