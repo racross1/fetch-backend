@@ -42,7 +42,6 @@ class UserView extends React.Component{
     }
 
     handleEarnDateChange = (e) => {
-        console.log(moment(e.target.value).format())
         this.setState({
             earnTimestamp: e.target.value
         })
