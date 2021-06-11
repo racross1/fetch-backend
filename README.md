@@ -30,6 +30,13 @@ Navigate into the **fetch-backend** folder and then enter the following commands
 
 The above will generate the database for your backend and will seed it with example data. 
 
+NOTE: if in your terminal you receive the following messages after running rails db:create: 
+
+    Database 'fetch_backend_development' already exists
+    Database 'fetch_backend_test' already exists
+
+This is not a problem and you can continue with the subsequent commands. These prompts simply indicate that the backend database is already established (database commands are included in case db is dropped or cleared during testing and use). 
+
 ## Frontend Installation
 Navigate into the **fetch-frontend folder** and then enter the following command in your terminal:
 
@@ -43,8 +50,12 @@ To start the backend server, make sure you are in the **fetch-backend** folder a
 
     rails s
 
+Keep this instance of your terminal open after running this command. 
+
 ## Starting Frontend
-To start the frontend, make sure you are in the **fetch-frontend** folder and then enter the following command in your terminal:
+To start the frontend, open a new terminal instance (keep backend terminal open). 
+
+In your new terminal instance navigate into the **fetch-frontend** folder and then enter the following command in your terminal:
 
     npm start
 
